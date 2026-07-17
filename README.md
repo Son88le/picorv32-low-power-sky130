@@ -1,10 +1,6 @@
 # PicoRV32 Low-Power Physical Design on SKY130 using OpenLane
 
 <p align="center">
-  <img src="images/banner.png" width="900">
-</p>
-
-<p align="center">
   Physical Design • OpenLane • OpenROAD • SKY130 • PicoRV32 • Operand Isolation • Clock Gating
 </p>
 
@@ -40,10 +36,6 @@ The impact of each technique was evaluated using Power, Performance and Area (PP
 ---
 
 ## Design Flow
-
-<p align="center">
-    <img src="images/design_flow.png" width="900">
-</p>
 
 The physical design flow consists of:
 
@@ -82,48 +74,6 @@ The physical design flow consists of:
 | Base | Original PicoRV32 implementation |
 | OPI | Operand Isolation optimization |
 | CG | Clock Gating optimization |
-
----
-
-# Physical Design Results
-
-## Base
-
-<p align="center">
-<img src="images/layout_base.png" width="700">
-</p>
-
----
-
-## Operand Isolation
-
-<p align="center">
-<img src="images/layout_opi.png" width="700">
-</p>
-
----
-
-## Clock Gating
-
-<p align="center">
-<img src="images/layout_cg.png" width="700">
-</p>
-
----
-
-# PPA Comparison
-
-<p align="center">
-<img src="images/ppa_chart.png" width="850">
-</p>
-
----
-
-# Power Analysis
-
-<p align="center">
-<img src="images/power_chart.png" width="850">
-</p>
 
 ---
 
