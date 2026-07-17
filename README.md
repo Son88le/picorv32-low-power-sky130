@@ -1,121 +1,182 @@
-# PicoRV32 Low-Power Physical Design
+# PicoRV32 Low-Power Physical Design on SKY130 using OpenLane
 
-RTL-to-GDSII implementation of the **PicoRV32 RISC-V processor** using the **OpenLane/OpenROAD** open-source ASIC flow on the **SkyWater SKY130** technology node.
+<p align="center">
+  <img src="images/banner.png" width="900">
+</p>
 
-This project investigates the impact of two low-power optimization techniques—**Operand Isolation (OPI)** and **Clock Gating (CG)**—on the processor's **Power, Performance, and Area (PPA)**.
-
----
-
-## Design Variants
-
-| Version | Description                                  |
-|---------|----------------------------------------------|
-| Base    | Original PicoRV32 implementation             |
-| OPI     | PicoRV32 with Operand Isolation optimization |
-| CG      | PicoRV32 with integrated Clock Gating cells  |
+<p align="center">
+  Physical Design • OpenLane • OpenROAD • SKY130 • PicoRV32 • Operand Isolation • Clock Gating
+</p>
 
 ---
 
-## Physical Design Flow
+## Overview
 
-```
-RTL
- └── Synthesis
-      └── Floorplan
-           └── Placement
-                └── Clock Tree Synthesis (CTS)
-                     └── Routing
-                          └── Signoff
-                               └── GDSII
-```
+This project presents the complete RTL-to-GDSII physical implementation of the PicoRV32 RISC-V processor using the open-source OpenLane flow and the SkyWater SKY130 technology.
+
+Two low-power optimization techniques were investigated:
+
+- Operand Isolation (OPI)
+- Clock Gating (CG)
+
+Three design versions were implemented and compared:
+
+- Base
+- Operand Isolation
+- Clock Gating
+
+The impact of each technique was evaluated using Power, Performance and Area (PPA) metrics.
+
+---
+
+## Objectives
+
+- Complete RTL-to-GDSII implementation using OpenLane.
+- Implement low-power optimization techniques.
+- Compare Base, OPI and CG implementations.
+- Analyze trade-offs between Power, Performance and Area.
+- Meet timing at 100 MHz on SKY130.
+
+---
+
+## Design Flow
+
+<p align="center">
+    <img src="images/design_flow.png" width="900">
+</p>
+
+The physical design flow consists of:
+
+1. RTL Design
+2. Logic Synthesis
+3. Floorplanning
+4. Placement
+5. Clock Tree Synthesis
+6. Routing
+7. Sign-off Verification
+8. GDSII Generation
 
 ---
 
 ## Technology
 
-- **Technology Node:** SkyWater SKY130 (130 nm)
-- **EDA Flow:** OpenLane
-- **PnR Engine:** OpenROAD
-- **Logic Synthesis:** Yosys
-- **Layout Verification:** Magic
-- **LVS:** Netgen
-- **Timing Analysis:** OpenSTA
+| Item | Description |
+|------|-------------|
+| Processor | PicoRV32 |
+| ISA | RV32I |
+| Technology | SkyWater SKY130 |
+| Flow | OpenLane |
+| PnR Engine | OpenROAD |
+| Synthesis | Yosys |
+| STA | OpenSTA |
+| DRC | Magic |
+| LVS | Netgen |
+| Clock Frequency | 100 MHz |
 
 ---
 
-## Design Target
+## Design Variants
 
-| Item            | Value               |
-|-----------------|---------------------|
-| Clock Frequency | **100 MHz**         |
-| Technology      | **SkyWater SKY130** |
-| Design Flow     | **RTL-to-GDSII**    |
+| Version | Description |
+|----------|-------------|
+| Base | Original PicoRV32 implementation |
+| OPI | Operand Isolation optimization |
+| CG | Clock Gating optimization |
 
 ---
 
-## Project Objectives
+# Physical Design Results
 
-- Implement PicoRV32 using the OpenLane/OpenROAD ASIC flow.
-- Compare three design variants:
-  - Base
-  - Operand Isolation (OPI)
-  - Clock Gating (CG)
-- Analyze the impact of each optimization on:
-  - Power
-  - Performance
-  - Area (PPA)
+## Base
+
+<p align="center">
+<img src="images/layout_base.png" width="700">
+</p>
+
+---
+
+## Operand Isolation
+
+<p align="center">
+<img src="images/layout_opi.png" width="700">
+</p>
+
+---
+
+## Clock Gating
+
+<p align="center">
+<img src="images/layout_cg.png" width="700">
+</p>
+
+---
+
+# PPA Comparison
+
+<p align="center">
+<img src="images/ppa_chart.png" width="850">
+</p>
+
+---
+
+# Power Analysis
+
+<p align="center">
+<img src="images/power_chart.png" width="850">
+</p>
 
 ---
 
 ## Repository Structure
 
 ```
-├── rtl/                # RTL source files
-├── constraints/        # Timing constraints
-├── openlane/           # OpenLane configuration
-├── reports/            # Timing, power and area reports
-├── results/            # GDSII, DEF, LEF, SPEF, SDF...
-├── docs/               # Figures and documentation
-└── README.md
+picorv32-low-power-sky130/
+│
+├── base/                 # Baseline implementation
+├── opi/                  # Operand Isolation implementation
+├── cg/                   # Clock Gating implementation
+│
+├── images/               # Layouts, charts and figures
+│
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## Tools
+## Main Results
+
+✔ Completed the OpenLane physical design flow from Synthesis to GDSII
+
+✔ Generated manufacturable GDSII layouts for three design variants
+
+✔ Achieved timing closure at 100 MHz
+
+✔ Evaluated the impact of Operand Isolation and Clock Gating on PPA
+
+---
+
+## Future Work
+
+- Apply additional low-power optimization techniques.
+- Integrate PicoRV32 into a complete SoC.
+- Compare results with commercial EDA tools.
+- Explore advanced technology nodes (65nm, 28nm, etc.).
+
+---
+
+## References
 
 - OpenLane
 - OpenROAD
-- Yosys
-- OpenSTA
-- Magic
-- Netgen
-- KLayout
+- SkyWater SKY130 PDK
+- PicoRV32 by Clifford Wolf
 
 ---
 
-## Output Files
+## Author
 
-The physical design flow generates:
+**Le Dang Thanh Son**
 
-- Netlist
-- DEF
-- LEF
-- GDSII
-- SDF
-- SPEF
-- Liberty (.lib)
-- DRC Report
-- LVS Report
-- STA Report
+Ho Chi Minh City University of Technology and Engineering (HCM-UTE)
 
----
-
-## Results
-
-The project successfully completed the RTL-to-GDSII flow for all three design variants and achieved the target operating frequency of **100 MHz** on the **SkyWater SKY130** technology.
-
----
-
-## License
-
-This project is intended for educational and research purposes.
