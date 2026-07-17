@@ -1,0 +1,54 @@
+#============================================================
+# PicoRV32 OPI Power Intent
+#============================================================
+
+upf_version 2.1
+
+# Supply definitions
+# tao chan nguon logic
+create_supply_port VDD
+create_supply_port VSS
+
+# tao net nguon noi bo
+create_supply_net VDD
+create_supply_net VSS
+
+# ket noi net va port
+connect_supply_net VDD -ports VDD
+connect_supply_net VSS -ports VSS
+
+# Main power domain
+create_power_domain PD_CORE \
+    -elements {picorv32}
+
+set_domain_supply_net PD_CORE \
+    -primary_power_net VDD \
+    -primary_ground_net VSS
+
+#------------------------------------------------------------
+# Operand Isolation Strategy for ALU datapath
+#------------------------------------------------------------
+
+# Isolation control signal should be generated from decode logic
+# Active HIGH when ALU inactive => isolate inputs
+set_isolation ISO_ALU \
+    -domain PD_CORE \
+    -applies_to outputs \
+    -clamp_value 0 \
+    -isolation_signal opi_alu_active \
+    -isolation_sense low
+
+# Target ALU operand buses
+set_isolation_control ISO_ALU \
+    -domain PD_CORE \
+    -isolation_signal opi_alu_active
+
+# Example affected nets
+# Depending on RTL naming, adjust:
+# alu_op_a
+# alu_op_b
+# alu_result
+
+# Map to standard cells
+map_isolation_cell ISO_ALU \
+    -lib_cells {sky130_fd_sc_hd__and2_1 sky130_fd_sc_hd__nand2_1}
